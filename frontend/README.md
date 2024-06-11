@@ -39,4 +39,4 @@ A estrutura do projeto está organizada da seguinte forma:
 2. **Iniciar o Servidor de Desenvolvimento**
 
 ```sh
-   npm run serve
+   npm run dev
