@@ -1,0 +1,95 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ./api/Dockerfile
+    restart: unless-stopped
+    working_dir: /var/www/
+    volumes:
+      - ./api:/var/www
+      - storage:/var/www/storage
+      - vendor:/var/www/vendor
+      - cache:/var/www/bootstrap/cache
+    depends_on:
+      - db
+      - redis
+      - nginx
+    environment:
+      - APP_ENV=local
+      - APP_DEBUG=true
+      - DB_CONNECTION=mysql
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_DATABASE=laravel
+      - DB_USERNAME=root
+      - DB_PASSWORD=root
+    networks:
+      - laravel
+
+  nginx:
+    image: nginx:alpine
+    restart: unless-stopped
+    ports:
+      - "8989:80"
+    volumes:
+      - ./api:/var/www
+      - ./api/docker/nginx/:/etc/nginx/conf.d/
+    networks:
+      - laravel
+
+  db:
+    image: mariadb:10.5.8
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE:-laravel}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-root}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-userpass}
+      MYSQL_USER: ${DB_USERNAME:-username}
+    volumes:
+      - dbdata:/var/lib/mysql
+    ports:
+      - "3388:3306"
+    networks:
+      - laravel
+
+  redis:
+    image: redis:latest
+    networks:
+      - laravel
+
+  queue:
+    build:
+      context: .
+      dockerfile: ./api/Dockerfile
+    image: laravel_queue
+    container_name: laravel_queue
+    restart: unless-stopped
+    working_dir: /var/www
+    volumes:
+      - ./api:/var/www
+      - storage:/var/www/storage
+      - vendor:/var/www/vendor
+      - cache:/var/www/bootstrap/cache
+    environment:
+      - APP_ENV=local
+      - APP_DEBUG=true
+      - DB_CONNECTION=mysql
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_DATABASE=laravel
+      - DB_USERNAME=root
+      - DB_PASSWORD=root
+    networks:
+      - laravel
+
+networks:
+  laravel:
+    driver: bridge
+
+volumes:
+  dbdata:
+  storage:
+  vendor:
+  cache:

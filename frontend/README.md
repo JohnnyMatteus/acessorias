@@ -1,29 +1,42 @@
-# README #
+# Projeto Frontend - Acessorias
 
-This README would normally document whatever steps are necessary to get your application up and running.
+Este projeto é uma aplicação frontend desenvolvida com Vue.js, Vuetify e TanStack para chamadas REST. A aplicação atende aos seguintes requisitos:
 
-### What is this repository for? ###
+- Listagem de produtos e usuários.
+- Criação, listagem e visualização de pedidos.
+- Funcionalidades de login, recuperação de senha e logout.
+- Respeito às heurísticas de Nielsen para usabilidade.
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+## Estrutura do Projeto
 
-### How do I get set up? ###
+A estrutura do projeto está organizada da seguinte forma:
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+- **src/**: Diretório principal do código fonte da aplicação.
+    - **components/**: Componentes Vue reutilizáveis.
+    - **views/**: Componentes de visualização (páginas).
+    - **router/**: Configurações de rotas.
+    - **store/**: Gerenciamento de estado com Vuex.
+    - **services/**: Serviços para chamadas REST e lógica de negócios.
+    - **plugins/**: Plugins Vue, como Vuetify.
+    - **assets/**: Arquivos estáticos, como imagens e estilos.
+- **public/**: Arquivos públicos, como index.html.
+- **tests/**: Testes automatizados.
 
-### Contribution guidelines ###
+## Iniciando o Projeto
 
-* Writing tests
-* Code review
-* Other guidelines
+### Pré-requisitos
 
-### Who do I talk to? ###
+- Node.js e npm instalados
 
-* Repo owner or admin
-* Other community or team contact
+### Passos para Iniciar o Projeto
+
+1. **Acessar a pasta**
+
+   ```sh
+   cd frontend
+   npm install
+
+2. **Iniciar o Servidor de Desenvolvimento**
+
+```sh
+   npm run serve

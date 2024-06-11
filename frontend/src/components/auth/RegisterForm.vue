@@ -11,11 +11,6 @@ const password = ref('');
 const toast = useToast();
 const router = useRouter();
 
-const emailValidated = localStorage.getItem('email');
-if (!emailValidated) {
-    toast.error('Acesso negado!');
-    router.back();
-}
 const validateForm = () => {
     if (!name.value) {
         toast.error('O campo de nome é obrigatório.');
