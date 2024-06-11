@@ -12,6 +12,7 @@ services:
       - storage:/var/www/storage
       - vendor:/var/www/vendor
       - cache:/var/www/bootstrap/cache
+      - ./api:/var/www:cached
     depends_on:
       - db
       - redis

@@ -44,7 +44,10 @@ WORKDIR /var/www
 COPY api /var/www
 
   # Copy the environment configuration file
-COPY api/.env.dev /var/www/.env
+COPY ./api/.env.dev .env
+
+# List files to confirm .env is copied
+RUN ls -la /var/www
 
   # Set permissions for Laravel
 RUN find /var/www -type d -exec chmod 0755 {} \; && \

@@ -51,5 +51,6 @@ $app->singleton(
 | from the actual running of the application and sending responses.
 |
 */
-
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__.'/../');
+$dotenv->load();
 return $app;
